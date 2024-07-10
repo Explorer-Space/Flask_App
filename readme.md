@@ -1,1 +1,3 @@
-# This is a repository for our new Flask app . 
+ # Docker Flask Application .
+ - This application is written in python .
+ - It shall be deployed on K8s .
