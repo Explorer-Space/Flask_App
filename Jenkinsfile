@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage ('code'){
             steps {
-                git url: "http://git.kodekloud.com:3000/max/Flask-App.git", branch: "master"
+                git url: "https://github.com/Explorer-Space/Flask_App.git", branch: "main"
                 echo "Git Repository Cloned Successfully"
                 sh "git --version"
                 sh "docker --version"
@@ -13,8 +13,15 @@ pipeline {
         }
         stage('Build and Test'){
             steps {
-                sh 'docker build -t flask-app-image .'
+                sh 'docker build -t docker-host:5000/flask-app:public .'
                 echo "Docker Image Built Successfully"
+            }
+        }
+        stage('Push'){
+            steps {
+                sh 'docker login -u dock_user -p dock_password docker-host:5000'
+                echo "logged in successfully"
+                sh 'docker push docker-host:5000/flask-app:public'
             }
         }
         
